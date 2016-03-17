@@ -1,0 +1,36 @@
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ".";
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    width: 0;
+    height: 0;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@function calculateRem($size) {
+    $remSize: $size / 16px;
+    @return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+    font-size: $size;
+    font-size: calculateRem($size);
+}
+
+/* simple transition mixin */
+@mixin transition-simple($prop, $t) {
+  -webkit-transition: $prop $t;
+  -moz-transition: $prop $t;
+  -ms-transition: $prop $t;
+  -o-transition: $prop $t;
+  transition: $prop $t;
+}

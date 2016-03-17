@@ -1,0 +1,9 @@
+{
+  "name": "calendar",
+  "version": "0.1.0",
+  "dependencies": {
+    "backbone": "latest",
+    "backbone.nativeview": "^0.3.3",
+    "backbone.localStorage": "^1.1.16"
+  }
+}
