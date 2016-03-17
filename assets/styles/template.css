@@ -1,0 +1,230 @@
+/* simple transition mixin */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  font: 100% 'Roboto', sans-serif; }
+
+.container {
+  width: 60rem;
+  margin: 0 auto; }
+
+.calendar-header {
+  margin-top: 2rem; }
+  .calendar-header:before, .calendar-header:after {
+    content: ".";
+    display: block;
+    overflow: hidden;
+    visibility: hidden;
+    font-size: 0;
+    line-height: 0;
+    width: 0;
+    height: 0; }
+  .calendar-header:after {
+    clear: both; }
+  .calendar-header .calendar-nav {
+    font-size: 18px;
+    font-size: 1.125rem;
+    text-decoration: none;
+    display: inline-block;
+    outline: 0 none;
+    color: #666;
+    padding: .5rem;
+    border: 1px #eee solid;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    border-radius: .25rem;
+    line-height: 1; }
+    .calendar-header .calendar-nav:hover {
+      background: #eeeeee; }
+
+.calendar-body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-direction: normal;
+  -webkit-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -moz-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  -moz-align-items: stretch;
+  align-items: stretch;
+  -webkit-align-content: space-between;
+  -ms-flex-line-pack: space-between;
+  align-content: space-between;
+  margin: .5rem 0 2rem; }
+  .calendar-body .calendar-row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    justify-content: space-between; }
+    .calendar-body .calendar-row .calendar-col {
+      font-size: 18px;
+      font-size: 1.125rem;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      border: 1px #eee solid;
+      width: 8.57143rem;
+      height: 8.57143rem;
+      cursor: pointer;
+      padding: .5rem;
+      color: #ccc;
+      font-weight: 400;
+      text-shadow: 1px 1px #fff; }
+      .calendar-body .calendar-row .calendar-col:hover, .calendar-body .calendar-row .calendar-col.selected {
+        background: rgba(255, 225, 136, 0.65);
+        color: #444; }
+      .calendar-body .calendar-row .calendar-col:active {
+        background: rgba(255, 225, 136, 0.8); }
+      .calendar-body .calendar-row .calendar-col:nth-child(6), .calendar-body .calendar-row .calendar-col:nth-child(7) {
+        color: red; }
+      .calendar-body .calendar-row .calendar-col.empty {
+        background: #EAEAEA;
+        pointer-events: none; }
+      .calendar-body .calendar-row .calendar-col h4, .calendar-body .calendar-row .calendar-col small, .calendar-body .calendar-row .calendar-col p {
+        font-size: 15px;
+        font-size: 0.9375rem;
+        font-weight: 400;
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        color: #444; }
+      .calendar-body .calendar-row .calendar-col small {
+        font-size: 12px;
+        font-size: 0.75rem;
+        color: #666; }
+      .calendar-body .calendar-row .calendar-col p {
+        font-size: 13px;
+        font-size: 0.8125rem;
+        margin: 0; }
+    .calendar-body .calendar-row.header .calendar-col {
+      height: auto;
+      background: #8e8e8e;
+      color: #fff;
+      text-shadow: none;
+      pointer-events: none; }
+
+.calendar-popup {
+  position: absolute;
+  width: 18.75rem;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 1rem;
+  background: #ffffff;
+  -webkit-box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+          box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  border-radius: .3rem; }
+  .calendar-popup .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 0 none;
+    background: none;
+    cursor: pointer; }
+    .calendar-popup .close:focus {
+      outline: 0 none; }
+  .calendar-popup form {
+    width: 100%;
+    display: block;
+    overflow: hidden; }
+    .calendar-popup form [type=text], .calendar-popup form textarea {
+      font-size: 13px;
+      font-size: 0.8125rem;
+      font-family: 'Roboto', sans-serif;
+      padding: .5rem .75rem;
+      background: #ffffff;
+      border: 1px #eee solid;
+      border-radius: .2rem;
+      outline: none;
+      -webkit-box-sizing: border-box;
+         -moz-box-sizing: border-box;
+              box-sizing: border-box;
+      width: 100%; }
+      .calendar-popup form [type=text]:focus, .calendar-popup form textarea:focus {
+        outline: 0 none; }
+      .calendar-popup form [type=text]:read-only, .calendar-popup form textarea:read-only {
+        background: #F7F7F7; }
+    .calendar-popup form div {
+      margin-bottom: 1rem; }
+    .calendar-popup form .popup-button {
+      font-size: 18px;
+      font-size: 1.125rem;
+      text-decoration: none;
+      display: inline-block;
+      outline: 0 none;
+      color: #666;
+      padding: .5rem;
+      border: 1px #eee solid;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+      border-radius: .25rem;
+      line-height: 1;
+      cursor: pointer; }
+      .calendar-popup form .popup-button:hover {
+        background: #eeeeee; }

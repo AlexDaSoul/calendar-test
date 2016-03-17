@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calendar</title>
+
+	<link rel="stylesheet" href="assets/styles/template.css">
+
+	<!--// Font Roboto load -->
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,700,500" rel="stylesheet">
+</head>
+<body>
+	<div id="app" class="container">
+	</div>
+
+
+
+
+	<script type="text/template" id="calendar-table-tmpl">
+		<%
+			day = 1;
+			index = 0;
+			className = '';
+		%>
+
+		<div class="calendar-header">
+			<a href="#" class="calendar-nav prev" data-month="<%= month %>" data-year="<%= year %>">&#9668;</a>
+			<a href="#" class="calendar-nav current" data-month="<%= month %>" data-year="<%= year %>">
+				<%= calendar.locale.months[month-1] %> &nbsp;-&nbsp; <%= year %>
+			</a>
+			<a href="#" class="calendar-nav next" data-month="<%= month %>" data-year="<%= year %>">&#9658;</a>
+		</div>
+
+		<div class="calendar-body">
+			<div class="calendar-row header">
+				<% _.each(calendar.locale.days, function(item, index) { %>
+				<div class="calendar-col"><%= item %></div>
+				<% }); %>
+			</div>
+
+			<% do {
+				if (index % 7 === 0) { %>
+					<div class="calendar-row">
+				<% } %>
+
+					<% if ((index < start) || (index >= (total + start))) { %>
+						<div class="calendar-col empty">&nbsp;</div>
+					<% } else { %>
+
+                        <%
+                        event = events[day + '-' + month + '-' + year];
+
+                        if (_.isUndefined(event)) { %>
+						<div class="calendar-col item-handler"
+						     data-id="id-<%= day %>-<%= month %>-<%= year %>">
+							<%= day %>
+
+                            <h4 data-id="id-<%= day %>-<%= month %>-<%= year %>"></h4>
+                            <small data-id="id-<%= day %>-<%= month %>-<%= year %>"></small>
+                            <p data-id="id-<%= day %>-<%= month %>-<%= year %>"></p>
+						</div>
+                        <% } else { %>
+                        <div class="calendar-col item-handler selected"
+                             data-id="id-<%= day %>-<%= month %>-<%= year %>">
+                            <%= day %>
+
+                            <h4 data-id="id-<%= day %>-<%= month %>-<%= year %>"><%= event.event %></h4>
+                            <small data-id="id-<%= day %>-<%= month %>-<%= year %>"><%= event.names %></small>
+                            <p data-id="id-<%= day %>-<%= month %>-<%= year %>"><%= event.comment %></p>
+                        </div>
+                        <% }  %>
+					<% day++;
+						} %>
+
+				<% if (index % 7 === 6) { %>
+					</div>
+				<% }
+				index++;
+			}
+			while (index < final); %>
+
+		</div>
+	</script>
+
+    <script type="text/template" id="calendar-popup-tmpl">
+        <button class="close">x</button>
+        <form>
+            <div>
+                <input type="text" name="event" value="<%= params.event %>" required placeholder="Событие">
+            </div>
+            <div>
+                <input type="text" name="date" value="<%= params.id %>" readonly placeholder="Дата">
+            </div>
+            <div>
+                <input type="text" name="names" value="<%= params.names %>" placeholder="Имена участников">
+            </div>
+            <div>
+                <textarea name="comment" cols="30" rows="10" placeholder="Описание"><%= params.comment %></textarea>
+            </div>
+
+            <button class="popup-button apply" type="submit">
+                Готово
+            </button>
+
+            <button class="popup-button delete">
+                Удалить
+            </button>
+        </form>
+    </script>
+
+	<script src="bower_components/underscore/underscore-min.js"></script>
+	<script src="bower_components/backbone/backbone-min.js"></script>
+	<script src="bower_components/backbone.nativeview/backbone.nativeview.js"></script>
+	<script src="bower_components/backbone.localStorage/backbone.localStorage-min.js"></script>
+	<script src="assets/js/build.js"></script>
+</body>
+</html>
